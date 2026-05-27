@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Билеты - Выставка «Мирас»</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-tickets">
+  <main class="tickets-page">
+    <h1 class="tickets-title">Билеты на выставку «Мирас»</h1>
+
+    <section class="tickets-list">
+      <div class="ticket-row">
+        <img src="image-27-05-26-19-28-3.jpeg" alt="Детский билет" class="ticket-mini">
+        <div class="ticket-text">
+          <h2>Детский билет</h2>
+          <p>500 рублей</p>
+        </div>
+        <a href="#ticket-form" class="buy-btn">Купить</a>
+      </div>
+
+      <div class="ticket-row">
+        <img src="image-27-05-26-19-28-2.jpeg" alt="Льготный билет" class="ticket-mini">
+        <div class="ticket-text">
+          <h2>Льготный билет</h2>
+          <p>700 рублей</p>
+        </div>
+        <a href="#ticket-form" class="buy-btn">Купить</a>
+      </div>
+
+      <div class="ticket-row">
+        <img src="image-27-05-26-19-28-1.jpeg" alt="Полный билет" class="ticket-mini">
+        <div class="ticket-text">
+          <h2>Полный билет</h2>
+          <p>1000 рублей</p>
+        </div>
+        <a href="#ticket-form" class="buy-btn">Купить</a>
+      </div>
+
+      <div class="ticket-row">
+        <img src="image-27-05-26-19-28.jpeg" alt="Семейный билет" class="ticket-mini">
+        <div class="ticket-text">
+          <h2>Семейный билет</h2>
+          <p>1700 рублей</p>
+        </div>
+        <a href="#ticket-form" class="buy-btn">Купить</a>
+      </div>
+    </section>
+
+    <form id="ticket-form" class="ticket-form">
+      <h2>Оформление билета</h2>
+
+      <label for="firstName">Имя</label>
+      <input type="text" id="firstName" name="firstName" required>
+
+      <label for="lastName">Фамилия</label>
+      <input type="text" id="lastName" name="lastName" required>
+
+      <label for="date">Дата</label>
+      <input type="date" id="date" name="date" min="2026-05-30" max="2026-06-17" required>
+
+      <label for="tariff">Тариф</label>
+      <select id="tariff" name="tariff" required>
+        <option value="" selected disabled>Выберите тариф</option>
+        <option value="child">Детский</option>
+        <option value="family">Семейный</option>
+        <option value="discount">Льготный</option>
+        <option value="full">Полный</option>
+      </select>
+
+      <button type="submit">Оформить билет</button>
+
+      <p id="successMessage" class="success-message">Ваш билет успешно оформлен</p>
+
+      <div id="ticketResult" class="ticket-result" style="display: none;">
+        <img id="resultTicketImg" src="" alt="Билет" class="result-ticket-img">
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('ticket-form');
+    const successMessage = document.getElementById('successMessage');
+    const ticketResult = document.getElementById('ticketResult');
+    const resultTicketImg = document.getElementById('resultTicketImg');
+    const tariff = document.getElementById('tariff');
+
+    const ticketImages = {
+      child: 'image-27-05-26-19-28-3.jpeg',
+      family: 'image-27-05-26-19-28.jpeg',
+      discount: 'image-27-05-26-19-28-2.jpeg',
+      full: 'image-27-05-26-19-28-1.jpeg'
+    };
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const selectedTariff = tariff.value;
+      const selectedText = tariff.options[tariff.selectedIndex].text;
+
+      successMessage.classList.add('show');
+      ticketResult.style.display = 'block';
+      resultTicketImg.src = ticketImages[selectedTariff];
+      resultTicketImg.alt = selectedText + ' билет';
+    });
+  </script>
+</body>
+</html>
